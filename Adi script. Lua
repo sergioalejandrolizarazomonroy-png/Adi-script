@@ -1,0 +1,85 @@
+# Adi-script
+Adi script --[[
+    FREE JOB HUB
+    Para usar en tu propio juego / Roblox Studio.
+]]
+
+local Config = {
+    Agricultura = false,
+    Pesca = false,
+    Mineria = false,
+    Repartidor = false,
+    TodosLosTrabajos = false
+}
+
+local Running = true
+
+local Jobs = {}
+
+function Jobs:Agricultura()
+    while Config.Agricultura and Running do
+        -- Aquí iría la lógica legítima de agricultura
+        task.wait(1)
+    end
+end
+
+function Jobs:Pesca()
+    while Config.Pesca and Running do
+        -- Aquí iría la lógica legítima de pesca
+        task.wait(1)
+    end
+end
+
+function Jobs:Mineria()
+    while Config.Mineria and Running do
+        task.wait(1)
+    end
+end
+
+function Jobs:Repartidor()
+    while Config.Repartidor and Running do
+        task.wait(1)
+    end
+end
+
+-- Permite ejecutar agricultura y pesca al mismo tiempo
+function StartJobs()
+    if Config.Agricultura then
+        task.spawn(function()
+            Jobs:Agricultura()
+        end)
+    end
+
+    if Config.Pesca then
+        task.spawn(function()
+            Jobs:Pesca()
+        end)
+    end
+
+    if Config.Mineria then
+        task.spawn(function()
+            Jobs:Mineria()
+        end)
+    end
+
+    if Config.Repartidor then
+        task.spawn(function()
+            Jobs:Repartidor()
+        end)
+    end
+end
+
+function StopAll()
+    Running = false
+
+    Config.Agricultura = false
+    Config.Pesca = false
+    Config.Mineria = false
+    Config.Repartidor = false
+end
+
+-- Ejemplo:
+Config.Agricultura = true
+Config.Pesca = true
+
+StartJobs()

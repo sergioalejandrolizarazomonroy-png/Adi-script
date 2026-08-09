@@ -1,2 +1,0 @@
-# Adi-script
-Adi script 
